@@ -18,4 +18,4 @@ def test_run():
     faces = app.get(img)
 
     print(len(faces))
-    assert len(faces) == 7
+    assert len(faces) == 6
