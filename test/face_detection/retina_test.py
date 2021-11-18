@@ -15,7 +15,39 @@ def test_run():
     app.prepare(ctx_id=0, det_size=(640, 640))
 
     img = cv2.imread('../data/input/f_actor_1.jpeg')
+    assert img is not None
     faces = app.get(img)
 
     print(len(faces))
+    # Easy case - Need have exactly 6 faces.
     assert len(faces) == 6
+
+    # Need capture full (13 faces) or more faces.
+    img = cv2.imread('../data/input/test2.jpg')
+    assert img is not None
+    faces = app.get(img)
+    assert len(faces) >= 13
+
+    # Need capture at least 20 faces
+    img = cv2.imread('../data/input/test3.jpg')
+    assert img is not None
+    faces = app.get(img)
+    assert len(faces) >= 20
+
+    # Need capture exactly 2 faces
+    img = cv2.imread('../data/input/test4.jpg')
+    assert img is not None
+    faces = app.get(img)
+    assert len(faces) == 2
+
+    # Need capture exactly 26 faces
+    img = cv2.imread('../data/input/test5.jpg')
+    assert img is not None
+    faces = app.get(img)
+    assert len(faces) == 26
+
+    # Need capture exactly 10 faces
+    img = cv2.imread('../data/input/test6.jpg')
+    assert img is not None
+    faces = app.get(img)
+    assert len(faces) == 10
